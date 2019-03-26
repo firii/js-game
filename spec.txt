@@ -10,4 +10,18 @@
     - level class
         - script engine
     - level manager
+    - level editor
     - asset manager
+2) Levels
+    - hall (biggest location)
+    - russian room
+    - informatics room
+    - physics room
+    - math room
+    - "ЕГЭ" final boss
+    - dialogues
+    - jojo references
+4) Graphics
+    - tileset
+    - interface
+5) Audio (OMG)
