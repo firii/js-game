@@ -1,0 +1,13 @@
+1) Game engine
+    - game state machine
+        - state class
+            - menu 
+            - game
+            - gameover
+    - entity class
+        - player
+        - characters
+    - level class
+        - script engine
+    - level manager
+    - asset manager
