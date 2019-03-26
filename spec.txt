@@ -21,7 +21,7 @@
     - "ЕГЭ" final boss
     - dialogues
     - jojo references
-4) Graphics
+3) Graphics
     - tileset
     - interface
-5) Audio (OMG)
+4) Audio (OMG)
