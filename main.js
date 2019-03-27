@@ -1,5 +1,19 @@
-let canvas = document.getElementById("game-canvas");
-let ctx = canvas.getContext("2d");
+window.addEventListener("load", function(l_event) {
+    
+    // Creating Game object, rednering and updating 60 times pes second
 
-ctx.fillStyle = "#000";
-ctx.fillRect(0, 0, 640, 480);
+    let game = new Game();
+
+    function main() {
+        if (!game.done) {
+            
+            game.handleInput();
+            game.update();
+            game.render();
+
+            requestAnimationFrame(main);
+        }
+    }
+
+    main();
+});
