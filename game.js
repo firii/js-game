@@ -1,44 +1,38 @@
 class Game {
     constructor() {
+        // Setting up the canvas context to draw on
         let canvas = document.getElementById("game-canvas");
         this.ctx = canvas.getContext("2d");
         this.ctx.imageSmoothingEnabled = false;
 
-        this.controller = new Controller();
+        this.ctrl = new Controller();
+
+        this.stateMng = new StateManager();
+        this.stateMng.push("MENU_STATE");
 
         this.done = false;
-
-        this.tile = new Image(24, 24);
-        this.tile.src = "img/tile.png";
-        this.tileLoaded = false;
-        this.tile.onload = (function (e) {this.tileLoaded = true}).bind(this);
-    }
-
-    render() {
-        background(this.ctx)
-        let tilesize = 72;
-        for (let i = 0; i < 640; i+= tilesize) {
-            for (let j = 0; j < 480; j+= tilesize) {
-                if (this.tileLoaded) {
-                    this.ctx.drawImage(this.tile, i, j, tilesize, tilesize);
-                }
-            }
-        }
-    }
-
-    update() {
-        this.controller.update();
     }
 
     handleInput() {
-        if (this.controller.isKeyDown("Escape")) {
-            console.log("Game finished");
+        this.stateMng.curState.handleInput(this.ctrl);
+    }
+
+    update() {
+        this.stateMng.curState.update();
+
+        if (!(this.stateMng.curState.newState === null)) {
+            this.stateMng.pushNewState();
         }
 
-        if (this.controller.isMouseDown()) {
-            console.log(this.controller.getMouseX() +
-            ", " + this.controller.getMouseY());
-            
+        if (this.stateMng.curState.isDone) {
+            this.stateMng.pop();
         }
+
+        this.ctrl.update();
     }
+
+    render() {
+        this.stateMng.curState.render(this.ctx);
+    }
+
 }

@@ -22,6 +22,7 @@ class Controller {
 
         let keyList = [
             "Escape",
+            "Enter",
             "keyW",
             "keyA",
             "keyS",
