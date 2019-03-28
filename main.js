@@ -4,6 +4,7 @@ window.addEventListener("load", function(l_event) {
 
     let game = new Game();
 
+
     function main() {
         if (!game.done) {
             

@@ -18,9 +18,19 @@ class MouseInput {
 
 class Controller {
     constructor() {
-        this._keyboard = {
-            "Escape": new KeyInput()
-        };
+        this._keyboard = {};
+
+        let keyList = [
+            "Escape",
+            "keyW",
+            "keyA",
+            "keyS",
+            "keyD"
+        ]
+
+        for (let key of keyList) {
+            this._keyboard[key] = new KeyInput();
+        }
 
         this._mouse = new MouseInput();
         
@@ -55,49 +65,39 @@ class Controller {
     }
 
     _handleKeyDown(event) {
-        let key = event.key;
-
-        if (this._keyboard.hasOwnProperty(key)) {        
-            this._keyboard[key].down = true;
-            this._keyboard[key].active = true;
+        if (this._keyboard.hasOwnProperty(event.code)) {        
+            this._keyboard[event.code].down = true;
+            this._keyboard[event.code].active = true;
         }
     }
 
     _handleKeyUp(event) {
-        let key = event.key;
-
-        if (this._keyboard.hasOwnProperty(key)) {
-            this._keyboard[key].down = false;
-            this._keyboard[key].active = false;
+        if (this._keyboard.hasOwnProperty(event.code)) {
+            this._keyboard[event.code].down = false;
+            this._keyboard[event.code].active = false;
         }
     }
 
-    // this part is written horribly unefficient
-    //TODO: improve efficiency, and possible performance issues
     _handleMouseDown(event) {
-        let button;
-        if (event.button == 0) 
-            button = "LButton";
-        else if (event.button == 2)
-            button = "RButton";
-        else
-            return;
-
-        this._mouse[button].down = true;
-        this._mouse[button].active = true;
+        if (event.button == 0) {
+            this._mouse.LButton.down = true;
+            this._mouse.LButton.active = true;
+        }
+        else if (event.button == 2) {
+            this._mouse.RButton.down = true;
+            this._mouse.RButton.active = true;
+        }
     }
 
     _handleMouseUp(event) {
-        let button;
-        if (event.button == 0) 
-            button = "LButton";
-        else if (event.button == 2)
-            button = "RButton";
-        else
-            return;
-
-        this._mouse[button].down = false;
-        this._mouse[button].active = false;
+        if (event.button == 0) {
+            this._mouse.LButton.down = false;
+            this._mouse.LButton.active = false;
+        }
+        else if (event.button == 2) {
+            this._mouse.RButton.down = false;
+            this._mouse.RButton.active = false;
+        }
     }
 
     _handleMouseMove(event) {
