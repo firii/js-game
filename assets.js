@@ -15,6 +15,7 @@ class AssetManager {
         
         this._images = {
             "player": new Asset("img/player.png"),
+            "gui": new Asset("img/gui.png"),
             "logo": new Asset("img/logo.png")
         };
 

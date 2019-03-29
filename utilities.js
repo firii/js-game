@@ -1,9 +1,16 @@
 const WIN_WIDTH = 640, WIN_HEIGHT = 480;
 
-function background(ctx, l_color = "#000") {
+function background(ctx, color = "#000") {
     ctx.save();
-    ctx.fillStyle = l_color;
+    ctx.fillStyle = color;
     ctx.fillRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
+    ctx.restore();
+}
+
+function point(ctx, x, y, color = "#f00") {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.fillRect(x - 1, y - 1, 3, 3);
     ctx.restore();
 }
 

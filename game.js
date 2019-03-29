@@ -3,7 +3,9 @@ class Game {
         // Setting up the canvas context to draw on
         let canvas = document.getElementById("game-canvas");
         this.ctx = canvas.getContext("2d");
+
         this.ctx.imageSmoothingEnabled = false;
+        this.ctx.font = "20px C64";
 
         this.ctrl = new Controller();
 
