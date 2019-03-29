@@ -23,10 +23,10 @@ class Controller {
         let keyList = [
             "Escape",
             "Enter",
-            "keyW",
-            "keyA",
-            "keyS",
-            "keyD"
+            "KeyW",
+            "KeyA",
+            "KeyS",
+            "KeyD"
         ]
 
         for (let key of keyList) {

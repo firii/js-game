@@ -42,7 +42,7 @@ class Rect {
 
 class Sprite {
     constructor(img, ...args) {
-        this.img = img;
+        this._img = img;
         if (args[0] instanceof Rect) {
             this.rect = args[0];
         } else if (args.length == 4) {
@@ -52,8 +52,12 @@ class Sprite {
         }        
     }
 
+    next() {
+        this.rect.y += this.rect.height;
+    }
+
     render(ctx, x, y, w = this.rect.width, h = this.rect.height) {
-        ctx.drawImage(this.img,
+        ctx.drawImage(this._img,
             this.rect.x, this.rect.y,
             this.rect.width, this.rect.height,
             x, y, w, h);

@@ -10,7 +10,7 @@ class Game {
         this.ctrl = new Controller();
 
         this.stateMng = new StateManager();
-        this.stateMng.push("MENU");
+        this.stateMng.push("MAIN_GAME");
 
         this.done = false;
     }

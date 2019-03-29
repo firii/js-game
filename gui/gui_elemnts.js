@@ -23,7 +23,7 @@ class Button {
     constructor(text, x, y) {
         this._sprite = new Sprite(Assets.getImage("gui"), 0, 0, 100, 15);
         this._pos = new Vector(x, y);
-        this._label = new Label(text, 45, x + 150, y + 33, "#0c1551");
+        this._label = new Label(text, 35, x + 150, y + 30, "#0c1551");
         this._label.isCentered = true;
         this.isPressed = false;
     }
