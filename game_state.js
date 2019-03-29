@@ -3,9 +3,8 @@ class GameState {
         this.isDone = false;
         this.newState = null;
 
-        console.log("created state:");
-        console.log(this);
-        
+        // console.log("created state:");
+        // console.log(this);
     }
 
     handleInput(ctrl) { }
