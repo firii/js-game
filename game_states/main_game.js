@@ -1,4 +1,4 @@
-class MainState extends GameState {
+class MainGameState extends GameState {
     constructor() {
         super();
         this.player = new Sprite(Assets.getImage("player"), 24, 0, 24, 24);

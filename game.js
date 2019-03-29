@@ -8,7 +8,7 @@ class Game {
         this.ctrl = new Controller();
 
         this.stateMng = new StateManager();
-        this.stateMng.push("MENU_STATE");
+        this.stateMng.push("MENU");
 
         this.done = false;
     }

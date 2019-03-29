@@ -2,9 +2,6 @@ class GameState {
     constructor() {
         this.isDone = false;
         this.newState = null;
-
-        // console.log("created state:");
-        // console.log(this);
     }
 
     handleInput(ctrl) { }
@@ -32,8 +29,8 @@ class StateManager {
     push(stateName) {
         let state;
         switch (stateName) {
-            case "MENU_STATE": state = new MenuState(); break;
-            case "MAIN_STATE": state = new MainState(); break;
+            case "MENU": state = new MenuState(); break;
+            case "MAIN_GAME": state = new MainGameState(); break;
         }
         this.stateStack.push(state);
     }

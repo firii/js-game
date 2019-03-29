@@ -1,12 +1,12 @@
 class MenuState extends GameState {
     constructor() {
         super();
-        this.logo = new Sprite(Assets.getImage("logo"), 0, 0, 128, 62);
+        this.logo = new Sprite(Assets.getImage("logo"), 0, 0, 118, 52);
     }
 
     handleInput(ctrl) {
         if (ctrl.isKeyPressed("Enter")) {
-            this.newState = "MAIN_STATE";
+            this.newState = "MAIN_GAME";
         }
     }
 
@@ -15,7 +15,7 @@ class MenuState extends GameState {
     }
 
     render(ctx) {
-        background(ctx, "#f60");
-        this.logo.render(ctx, 320 - 64, 0);
+        background(ctx, "#e6f0f7");
+        this.logo.render(ctx, 143, 20, 118 * 3, 52 * 3);
     }
 }
