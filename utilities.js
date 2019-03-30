@@ -20,9 +20,14 @@ class Vector {
         this.y = y;
     }
 
-    add(vec) {
-        this.x += vec.x;
-        this.y += vec.y;
+    add(...args) {
+        if (args[0] instanceof Vector) {
+            this.x += args[0].x;
+            this.y += args[0].y;
+        } else {
+            this.x += args[0];
+            this.y += args[1];
+        }
     }
 
     substract(vec) {

@@ -12,7 +12,7 @@ class MainGameState extends GameState {
     }
 
     update() {
-        
+        this.player.update();
     }
 
     render(ctx) {
