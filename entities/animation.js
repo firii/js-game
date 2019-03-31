@@ -58,4 +58,5 @@ class AnimationManager {
     setCurrent(name) {
         this._currentAnim = name;
     }
+
 }

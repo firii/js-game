@@ -18,8 +18,10 @@ class Entity {
         this.isDead = false;
         this._animTime = 0;
 
-        this._dx = 0;
-        this._dy = 0;
+        this.movSpeed = 5;
+
+        this.dx = 0;
+        this.dy = 0;
 
         this._facing = DIR.DOWN;
         this._state = ENTITY_STATES.IDLE;
@@ -30,7 +32,32 @@ class Entity {
     }
 
     update() {
+        if (this._animTime > 0) {
+            //for pop up animations 
 
+            this._animTime--;
+        } else {
+            if (this.dx != 0 || this.dy != 0) {
+                this._state = ENTITY_STATES.WALK;
+
+                if (!this.dx && this.dy) {
+                    this._facing = (this.dy > 0) ? DIR.DOWN : DIR.UP;
+                } else {
+                    this._facing = (this.dx > 0) ? DIR.RIGHT : DIR.LEFT;
+                }
+
+            } else {
+                //this._state = ENTITY_STATES.IDLE;
+            }
+        }
+
+        
+        this._anim.setCurrent(this._state + "_" + this._facing);
+
+        this._pos.add(this.dx, this.dy);
+
+        this.dx = 0;
+        this.dy = 0;
     }
 
     render(ctx) {

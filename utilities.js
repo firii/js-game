@@ -1,4 +1,8 @@
 const WIN_WIDTH = 640, WIN_HEIGHT = 480;
+const TILE_SIZE = 24;
+const SCALE = 3;
+const TILE_SCALE = TILE_SIZE * SCALE;
+
 
 function background(ctx, color = "#000") {
     ctx.save();
