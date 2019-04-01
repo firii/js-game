@@ -11,14 +11,15 @@ const DIR = {
     LEFT: "LEFT"
 }
 
-class Entity {
-    constructor (x, y) {
+class Living {
+    constructor (x, y, w = TILE_SIZE, h = TILE_SIZE) {
         this._pos = new Vector(x, y);
+        this._dim = new Vector(w, h);
         this._anim = new AnimationManager();
         this.isDead = false;
         this._animTime = 0;
 
-        this.movSpeed = 5;
+        this.movSpeed = 2;
 
         this.dx = 0;
         this.dy = 0;
@@ -33,7 +34,7 @@ class Entity {
 
     update() {
         if (this._animTime > 0) {
-            //for pop up animations 
+            //for lasting animations 
 
             this._animTime--;
         } else {
@@ -60,7 +61,32 @@ class Entity {
         this.dy = 0;
     }
 
+    checkCollision(solids, w) {
+        for (let i = Math.floor((this._pos.y + this.dy)/TILE_SIZE);
+        i < Math.ceil((this._pos.y + this._dim.y + this.dy)/TILE_SIZE); i++) {
+            for (let j = Math.floor((this._pos.x + this.dx)/TILE_SIZE);
+            j < Math.ceil((this._pos.x + this._dim.x + this.dx)/TILE_SIZE); j++) {
+
+                if (solids[i * w + j]) {                    
+                    this.dx = 0;
+                    this.dy = 0;
+                }
+
+            }
+        }
+    }
+
     render(ctx) {
         this._anim.render(ctx, this._pos.x, this._pos.y);
     }
+
+    get x() { return this._pos.x; }
+    get y() { return this._pos.y; }
+    get width() { return this._dim.x; }
+    get height() { return this._dim.y; }
 }
+
+// for (let i = Math.floor((this._pos.y + this.dy)/TILE_SIZE);
+//         i < Math.floor((this._pos.y + this._dim.y  + this.dy)/TILE_SIZE); i++) {
+//             for (let j = Math.floor((this._pos.x + this.dy)/TILE_SIZE);
+//             j < Math.floor((this._pos.x + this._dim.x  + this.dy)/TILE_SIZE); j++) {

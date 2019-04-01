@@ -1,6 +1,6 @@
 const WIN_WIDTH = 640, WIN_HEIGHT = 480;
 const TILE_SIZE = 24;
-const SCALE = 3;
+const SCALE = 2;
 const TILE_SCALE = TILE_SIZE * SCALE;
 
 

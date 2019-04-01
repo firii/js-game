@@ -24,7 +24,7 @@ class Animation {
 
     render(ctx, x, y) {
         this._sprite.rect = this._frames[Math.floor(this._currentFrame)];
-        this._sprite.render(ctx, x, y, this._sprite.rect.width * 3, this._sprite.rect.height * 3);
+        this._sprite.render(ctx, x * SCALE, y * SCALE, this._sprite.rect.width * SCALE, this._sprite.rect.height * SCALE);
     }
 }
 
