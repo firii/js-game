@@ -1,13 +1,17 @@
 //json files must be loaded through server,
 //this is actually a placeholder .js file
-const LEVEL1 = {
+const level1 = {
     "tileset": "tileset1",
     "tilesetDim": [10, 10],
     "tilemapDim": [36, 36],
     "playerPos": [100, 100],
-    "enemies": {
-        "enya": [5, 5]
-    },
+    "population": [
+        {
+            "id": 1,
+            "type": "zinaida",
+            "pos": [120, 100]
+        }
+    ],
     "layers": [
         [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
          10,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,12,

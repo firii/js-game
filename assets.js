@@ -4,12 +4,13 @@ class Asset {
 
         // Placeholder for local testing,
         // will be removed upon releasing server version
-        if (filepath.tileset) {
+        if (typeof filepath != "string") {
             this.resource = filepath;
             this.isLoaded = true;
             return;
         }
 
+        filepath = "assets/" + filepath;
         if (filepath.endsWith("png")) {
             this.resource = new Image();
 
@@ -35,14 +36,17 @@ class AssetManager {
         
         this._assets = {
             // Images
-            "player": new Asset("img/sample.png"),
-            "gui": new Asset("img/gui.png"),
-            "test": new Asset("img/test.png"),
-            "tileset1": new Asset("img/tileset.png"),
-            "logo": new Asset("img/logo.png"),
+            "player": new Asset("images/player.png"),
+            "dialog": new Asset("images/dialog_bg.png"),
+            "test": new Asset("images/test.png"),
+            "tileset1": new Asset("images/tileset.png"),
+            "logo": new Asset("images/logo.png"),
+            "bg_menu": new Asset("images/menu_bg.png"),
 
             // Json
-            "level1": new Asset(LEVEL1)
+            "level1": new Asset(level1),
+            "anim_player": new Asset(anim_player)
+
         };
 
         let done = true;

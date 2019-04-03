@@ -3,6 +3,25 @@ const TILE_SIZE = 24;
 const SCALE = 2;
 const TILE_SCALE = TILE_SIZE * SCALE;
 
+/**
+ * @enum
+ */
+const ENTITY_STATES = {
+    IDLE: "IDLE",
+    WALK: "WALK",
+    HIT: "HIT"
+}
+
+/**
+ * @enum
+ */
+const DIR = {
+    UP: "UP",
+    RIGHT: "RIGHT",
+    DOWN: "DOWN",
+    LEFT: "LEFT"
+}
+
 
 function background(ctx, color = "#000") {
     ctx.save();
@@ -33,11 +52,6 @@ class Vector {
             this.y += args[1];
         }
     }
-
-    substract(vec) {
-        this.x -= vec.x;
-        this.y -= vec.y;
-    }
 }
 
 class Rect {
@@ -46,6 +60,10 @@ class Rect {
         this.y = y;
         this.width = width;
         this.height = height;
+    }
+
+    get bounds() {
+        return [this.x, this.y, this.width, this.height];
     }
 }
 
@@ -59,10 +77,6 @@ class Sprite {
         } else {
             this.rect = new Rect(0, 0, 0, 0);
         }        
-    }
-
-    next() {
-        this.rect.y += this.rect.height;
     }
 
     render(ctx, x, y, w = this.rect.width, h = this.rect.height) {

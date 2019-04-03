@@ -1,12 +1,11 @@
 class Animation {
-    constructor(sprite, frames, speed) {
+    constructor(sprite, speed, frames) {
         this._sprite = sprite;
         this._speed = speed;
 
         this._frames = [];
-        for (let i = 0; i < frames; i++) {
-            this._frames.push(new Rect(sprite.rect.width * i, sprite.rect.y,
-                sprite.rect.width, sprite.rect.height));
+        for (let frame of frames) {
+            this._frames.push(new Rect(...frame));
         }
 
         this._currentFrame = 0;        
@@ -29,15 +28,20 @@ class Animation {
 }
 
 class AnimationManager {
-    constructor() {
+    constructor(json) {
         this._anims = {};
-        this._paused = {}
-
+        this._paused = {};
         this._currentAnim = "";
+        this._sprite = new Sprite(Assets.get(json.sprite));
+
+        for (let a in json) {
+            if (a == "sprite") continue;
+            this.create(a, this._sprite, json[a].speed, json[a].frames);
+        }
     }
 
-    create(name, sprite, frames, speed) {
-        this._anims[name] = new Animation(sprite, frames, speed);
+    create(name, sprite, speed, frames) {
+        this._anims[name] = new Animation(sprite, speed, frames);
         this._paused[name] = false;
     }
 

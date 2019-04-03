@@ -1,17 +1,10 @@
 1) Game engine
-    - game state machine
-        - state class
-            - menu 
-            - game
-            - gameover
     - entity class
         - player
         - characters
-    - level class
         - script engine
     - level manager
     - level editor
-    - asset manager
 2) Levels
     - hall (biggest location)
     - russian room
@@ -25,3 +18,41 @@
     - tileset
     - interface
 4) Audio (OMG)
+
+
+index.html
+main.js
+utils.js
+controller.js
+assets.js
+*style
+    style.css
+    BBCMicrofont.ttf
+*assets
+    *img
+    *anim
+    *npc
+    *aud
+    *lvl
+*engine
+    game.js
+    animation_manager.js
+    *gui
+        ...gui_elements
+    *game_states
+        main_game.js
+        menu.js
+        state.js
+        *main_game
+            *living
+                living.js
+                player.js
+                npc.js
+                enemy.js
+            *tilemap
+            *script_engine
+
+        
+
+
+

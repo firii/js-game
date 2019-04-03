@@ -4,7 +4,7 @@ class GameState {
         this.newState = null;
     }
 
-    handleInput(ctrl) { }
+    handleInput() { }
 
     update() { }
 

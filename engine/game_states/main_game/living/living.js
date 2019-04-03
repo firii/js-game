@@ -1,21 +1,8 @@
-const ENTITY_STATES = {
-    IDLE: "IDLE",
-    WALK: "WALK",
-    HIT: "HIT"
-}
-
-const DIR = {
-    UP: "UP",
-    RIGHT: "RIGHT",
-    DOWN: "DOWN",
-    LEFT: "LEFT"
-}
-
 class Living {
-    constructor (x, y, w = TILE_SIZE, h = TILE_SIZE) {
+    constructor (anim, x, y, w = TILE_SIZE, h = TILE_SIZE) {
         this._pos = new Vector(x, y);
         this._dim = new Vector(w, h);
-        this._anim = new AnimationManager();
+        this._anim = new AnimationManager(anim);
         this.isDead = false;
         this._animTime = 0;
 
@@ -28,7 +15,7 @@ class Living {
         this._state = ENTITY_STATES.IDLE;
     }
 
-    handleInput(ctrl) {
+    handleInput() {
         
     }
 
@@ -74,10 +61,6 @@ class Living {
 
             }
         }
-    }
-
-    render(ctx) {
-        this._anim.render(ctx, this._pos.x, this._pos.y);
     }
 
     get x() { return this._pos.x; }

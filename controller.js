@@ -24,6 +24,7 @@ class Controller {
             "Escape",
             "Equal",
             "Minus",
+            "Space",
             "Enter",
             "KeyW",
             "KeyA",
@@ -37,17 +38,16 @@ class Controller {
 
         this._mouse = new MouseInput();
         
-
-        window.addEventListener("keydown",
+        document.addEventListener("keydown",
             this._handleKeyDown.bind(this));
-        window.addEventListener("keyup",
+        document.addEventListener("keyup",
             this._handleKeyUp.bind(this));
 
-        window.addEventListener("mousedown",
+        document.addEventListener("mousedown",
             this._handleMouseDown.bind(this));
-        window.addEventListener("mouseup",
+        document.addEventListener("mouseup",
             this._handleMouseUp.bind(this));
-        window.addEventListener("mousemove",
+        document.addEventListener("mousemove",
             this._handleMouseMove.bind(this));
     }
 
@@ -64,7 +64,6 @@ class Controller {
                     this._mouse[button].down = false;
                 }
         }
-        
     }
 
     _handleKeyDown(event) {

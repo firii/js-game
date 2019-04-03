@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>JS-Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="style/main.css">
+    
+    <script src="assets/animation/anim_player.js"></script>
+    <script src="assets/levels/level1.js"></script>
+    <script src="assets/npc/zinaida.js"></script>
 
-    <script src="level_data/level1.js"></script>
-
-    <script src="utilities.js" defer></script>
-    <script src="assets.js" defer></script>
-    <script src="controller.js" defer></script>
-    <script src="animation.js" defer></script>
-    <script src="living/living.js" defer></script>
-    <script src="living/player.js" defer></script>
-    <script src="tilemap/tilemap.js" defer></script>
-    <script src="gui/gui_elemnts.js" defer></script>
-    <script src="game_states/state.js" defer></script>
-    <script src="game_states/main_game.js" defer></script>
-    <script src="game_states/menu.js" defer></script>
-    <script src="game.js" defer></script>
     <script src="main.js" defer></script>
-
+    <script src="utils.js" defer></script>
+    <script src="controller.js" defer></script>
+    <script src="assets.js" defer></script>
+    <script src="engine/game.js" defer></script>
+    <script src="engine/animation_manager.js" defer></script>
+    <script src="engine/gui/dialog_window.js" defer></script>
+    <script src="engine/gui/label.js" defer></script>
+    <script src="engine/game_states/state_manager.js" defer></script>
+    <script src="engine/game_states/menu.js" defer></script>
+    <script src="engine/game_states/main_game.js" defer></script>
+    <script src="engine/game_states/main_game/living/living.js" defer></script>
+    <script src="engine/game_states/main_game/living/player.js" defer></script>
+    <script src="engine/game_states/main_game/tilemap/tilemap.js" defer></script>
     
 </head>
 <body>
     <canvas id="game-canvas" width="640" height="480"></canvas>
+    <!-- <p style="font: 30px BBCMicrofont; margin-top: -10px;">test version 0.0.1</p> -->
 </body>
 </html>
