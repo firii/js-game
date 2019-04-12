@@ -4,59 +4,106 @@ class MainGameState extends GameState {
 
         this.levels = {
             "hall": Assets.get("level1"),
-            "math_room" : {}
         }
-
         this.curLevel = this.levels["hall"];
+
 
         this.tileMap = new TileMap(this.curLevel);
         
-        this.player = new Player(this.curLevel);
-        this.enemies = this.populateEnemies();
-        this.npc = this.populateNPCs();
+
+        this.player = new Living(Assets.get("anim_player"),
+        ...this.curLevel.playerPos);
+        this.player._facing = DIR.DOWN;
+
+
+        this.interactable = this.populateInteractable();
+        this.sortFunc = (function (a, b) {
+            return Vector.dist(a.pos, this.pos) - Vector.dist(b.pos, this.pos)
+        }).bind(this.player);
+
+
+        this.se = new ScriptEngine(this);
+        this.requestAction = false;
 
         var spDialog = new Sprite(Assets.get("dialog"), 0, 0, 640, 135);
         this.dialogWin = new DialogWindow(0, 345, spDialog);
-        this.dialogWin.showDialog("SANS", "ыыыыы ыыыыыыыы ыыыыы ыыы ыыыыыы ы ыыыы...");
+        // this.dialogWin.showDialog("Баб Зина", ["por favor parlor de folar"], ["Muchios", "Gracias"]);
     }
 
-    changeLevel(level) {
-
-    }
-
-    populateEnemies() {
-        
-    }
-
-    populateNPCs() {
+    changeLevel(levelName) {
 
     }
 
+    populateInteractable() {
+        let result = [];
+        for (let i of this.curLevel.population) {
+            result.push(new Interactable(i));
+        }
+        return result;
+    }
     
 
     handleInput() {
 
-        
-        this.player.handleInput();
+        if (!this.se.inActionLoop) {
+            if (ctrl.isKeyPressed("KeyW")) this.player.dy = -this.player.movSpeed;
+            if (ctrl.isKeyPressed("KeyS")) this.player.dy = this.player.movSpeed;
+            if (ctrl.isKeyPressed("KeyD")) this.player.dx = this.player.movSpeed;
+            if (ctrl.isKeyPressed("KeyA")) this.player.dx = -this.player.movSpeed;
+    
+            // cancel diagonal movement
+            if (this.player.dx && this.player.dy) this.player.dy = 0;
+
+            // handle player press to activate interactable object
+            if (ctrl.isKeyDown("KeyE")) this.requestAction = true;
+        }
+
         this.dialogWin.handleInput();
     }
 
     update() {
-        this.player.checkCollision(this.curLevel.solids, this.curLevel.tilemapDim[0]);
-        this.player.update();
+        this.interactable.forEach((inter) => {inter.update()});
 
+        if (!this.se.inActionLoop) {
+            // if players is currently not in action loop,
+            // meaning no dialog is displayed or automatic action performed
+            // we look through interactable objects in range of activation
+            let avaliable = [];
+            for (let inter of this.interactable) {         
+                if (Vector.dist(inter.pos, this.player.pos) < inter.activationRadius) {
+                    avaliable.push(inter);
+                }
+            }
+    
+            if (avaliable.length != 0) {
+                // if object is in range and automatic it will perform actions automatically
+                let a = findAuto(avaliable)
+                if (a) {
+                    this.se.interact(a);
+                } else {
+                    // else object closest to player is marked as avaliable
+                    avaliable.sort(this.sortFunc);
+                    avaliable[0].avaliable = true;
+                    // 
+                    if (this.requestAction) this.se.interact(avaliable[0])
+                }
+            }
+        } else {
+            // do commands, order actions
+            
+            
+        }
+        this.player.checkCollision(this.curLevel.solids, this.curLevel.tilemapDim[0]);
+        this.player.checkEntityCollision(this.interactable);
+        this.player.update();
+        
         this.dialogWin.update();
-        if (this.dialogWin.getAnswer()) {
-            this.dialogWin.showDialog("SANS", "so what do you think?",
-            ["wait what?", "*uhm, okay"], 600);
-        }
-        if (this.dialogWin.isTimeUp()) {
-            this.dialogWin.showDialog("SANS", "so be it!\nfight me!")
-        }
+        
+        this.requestAction = false;
     }
 
-    render(ctx) {
-        background(ctx, "#000");
+    render() {
+        background("#000");
 
         /**
          * @todo move all calculations in another place
@@ -104,11 +151,14 @@ class MainGameState extends GameState {
         // render on map objects
         ctx.save();
         ctx.translate(-offsetX, -offsetY);
-        this.tileMap.render(ctx, beginRenderX, beginRenderY, endRenderX, endRenderY);
-        this.player.render(ctx);
+        this.tileMap.render(beginRenderX, beginRenderY, endRenderX, endRenderY);
+        for (let inter of this.interactable) {
+            inter.render();
+        }
+        this.player.render();
         ctx.restore();
 
         // display GUI
-        this.dialogWin.render(ctx);
+        this.dialogWin.render();
     }
 }

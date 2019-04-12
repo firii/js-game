@@ -36,16 +36,19 @@ class AssetManager {
         
         this._assets = {
             // Images
-            "player": new Asset("images/player.png"),
+            "player": new Asset("images/ivanov.png"),
             "dialog": new Asset("images/dialog_bg.png"),
             "test": new Asset("images/test.png"),
             "tileset1": new Asset("images/tileset.png"),
             "logo": new Asset("images/logo.png"),
             "bg_menu": new Asset("images/menu_bg.png"),
-
+            "zinaida": new Asset("images/zinaida.png"),
+            
             // Json
             "level1": new Asset(level1),
-            "anim_player": new Asset(anim_player)
+            "npc_zinaida": new Asset(npc_zinaida),
+            "anim_player": new Asset(anim_player),
+            "anim_zinaida": new Asset(anim_zinaida)
 
         };
 

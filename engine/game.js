@@ -1,13 +1,8 @@
 class Game {
     constructor() {
-        // Setting up the canvas context to draw on
-        let canvas = document.getElementById("game-canvas");
-        this.ctx = canvas.getContext("2d");
-
-        this.ctx.imageSmoothingEnabled = false;
 
         this.stateManager = new StateManager();
-        this.stateManager.push("MENU");
+        this.stateManager.push("MAIN_GAME");
 
         this.done = false;
     }
@@ -17,20 +12,19 @@ class Game {
     }
 
     update() {
-        this.stateManager.curState.update();
-
         if (!(this.stateManager.curState.newState === null)) {
             this.stateManager.pushNewState();
         }
-
+        
         if (this.stateManager.curState.isDone) {
             this.stateManager.pop();
         }
-
+        
+        this.stateManager.curState.update();
     }
 
     render() {
-        this.stateManager.curState.render(this.ctx);
+        this.stateManager.curState.render();
     }
 
 }

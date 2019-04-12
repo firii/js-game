@@ -25,7 +25,7 @@ class Controller {
             "Equal",
             "Minus",
             "Space",
-            "Enter",
+            "KeyE",
             "KeyW",
             "KeyA",
             "KeyS",

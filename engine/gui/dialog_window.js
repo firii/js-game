@@ -34,7 +34,7 @@ class OptionWindow {
 
     handleInput() {
         if (this._glowTime <= 0 && this.isVisible) {
-            if (ctrl.isKeyDown("Enter")) {
+            if (ctrl.isKeyDown("KeyE")) {
                 this._glowTime = this._maxGlowTime;
             } else if (ctrl.isKeyDown("Space")) {                 
                 this._options[this._curOption].toggleBrackets();
@@ -55,16 +55,22 @@ class OptionWindow {
         }
     }
 
-    render(ctx) {
+    render() {
         if (this.isVisible) {            
             for (let option in this._options) {
                 if (option == this._curOption && this._glowTime % 10 > 5) continue;
-                    this._options[option].render(ctx);
+                    this._options[option].render();
             }
         }
     }
 
 }
+
+/**
+ * @todo separate DialogWindow into two classes
+ * QuoteWindow for skippable dialogues
+ * AskWindow for dialogues with answers and timer
+ */
 
 class DialogWindow extends OptionWindow{
     constructor(x, y, bgSprite) {
@@ -76,9 +82,14 @@ class DialogWindow extends OptionWindow{
          * @todo make relative to WIN_WIDTH, WIN_HEIGHT
          */
         this._titleLabel = new Label("", 24, x + 10, y + 25, "#fff", "left");
-        this._textLabel = new Label("", 20, x + 10, y + 50, "#99aebd", "left");
         this._skipLabel = new Label("[ПРОБЕЛ]", 20, WIN_WIDTH / 2, 460, "#99aebd");
         this._timerLabel = new Label("", 24, 630, y + 25, "#fff", "right");
+
+        this._textLabels = [
+            new Label("", 20, x + 10, y + 50, "#99aebd", "left"),
+            new Label("", 20, x + 10, y + 60, "#99aebd", "left"),
+            new Label("", 20, x + 10, y + 70, "#99aebd", "left")
+        ];
 
         this.setOptions(
             new Label("", 20, 160, 455),
@@ -106,10 +117,13 @@ class DialogWindow extends OptionWindow{
         }
     }
 
-    showDialog(title, text, answers, time) {
+    showDialog(title, lines, answers, time) {
         this._reset();
         this._titleLabel.text = title;
-        this._textLabel.text = text;
+
+        for (let i in this._textLabels) {
+            this._textLabels[i].text = lines[i];
+        }
         
         if (answers) {
             if (time) this._timer = time;
@@ -149,8 +163,9 @@ class DialogWindow extends OptionWindow{
 
     handleInput() {
         if (this._glowTime <= 0 && this.isVisible) {
-            if (ctrl.isKeyDown("Enter")) {
-                this._glowTime = this._maxGlowTime;
+            if (ctrl.isKeyDown("KeyE")) {
+                if (this._nOptions)
+                    this._glowTime = this._maxGlowTime;
             } else if (ctrl.isKeyDown("Space")) {
                 if (this._nOptions) {                    
                     this._options[this._curOption].toggleBrackets();
@@ -177,21 +192,24 @@ class DialogWindow extends OptionWindow{
         }
     }
 
-    render(ctx) {
+    render() {
         if (this.isVisible) {
-            this._sprite.render(ctx, this._pos.x, this._pos.y);
-            this._titleLabel.render(ctx);
-            this._textLabel.render(ctx);
-            this._timerLabel.render(ctx);
+            this._sprite.render(this._pos.x, this._pos.y);
+            this._titleLabel.render();
+            this._timerLabel.render();
+
+            for (let label of this._textLabels) {
+                if (label.text) label.render();
+            }
             
             if (this._nOptions != 0) {
                 for (let option in this._options) {
                     if (option == this._curOption && this._glowTime % 10 > 5) continue;
-                        this._options[option].render(ctx);
+                        this._options[option].render();
                 }
             } else {
                 if (this._glowTime % 10 < 5)
-                    this._skipLabel.render(ctx);
+                    this._skipLabel.render();
             }
         }
     }

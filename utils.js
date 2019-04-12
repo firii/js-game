@@ -23,18 +23,25 @@ const DIR = {
 }
 
 
-function background(ctx, color = "#000") {
+function background(color = "#000") {
     ctx.save();
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, WIN_WIDTH, WIN_HEIGHT);
     ctx.restore();
 }
 
-function point(ctx, x, y, color = "#f00") {
+function point(x, y, color = "#f00") {
     ctx.save();
     ctx.fillStyle = color;
     ctx.fillRect(x - 1, y - 1, 3, 3);
     ctx.restore();
+}
+
+function findAuto(arrInteractable) {
+    for (let i of arrInteractable) {
+        if (i.automatic) return i;
+    }
+    return null;
 }
 
 class Vector {
@@ -52,7 +59,22 @@ class Vector {
             this.y += args[1];
         }
     }
+
+    setCoords(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    scale(sx, sy) {
+        this.x *= sx;
+        this.y *= sy;    
+    }
 }
+
+Vector.dist = function (vec1, vec2) {
+    return Math.sqrt((vec1.x - vec2.x)**2 + (vec1.y - vec2.y)**2);
+}
+
 
 class Rect {
     constructor(x, y, width, height) {
@@ -79,7 +101,7 @@ class Sprite {
         }        
     }
 
-    render(ctx, x, y, w = this.rect.width, h = this.rect.height) {
+    render(x, y, w = this.rect.width, h = this.rect.height) {
         ctx.drawImage(this._img,
             this.rect.x, this.rect.y,
             this.rect.width, this.rect.height,

@@ -1,15 +1,20 @@
-//json files must be loaded through server,
-//this is actually a placeholder .js file
 const level1 = {
     "tileset": "tileset1",
     "tilesetDim": [10, 10],
     "tilemapDim": [36, 36],
-    "playerPos": [100, 100],
+    "playerPos": [50, 50],
     "population": [
         {
             "id": 1,
-            "type": "zinaida",
-            "pos": [120, 100]
+            "type": "npc_zinaida",
+            "pos": [120, 100],
+            "facing": "RIGHT"
+        },
+        {
+            "id": 2,
+            "type": "npc_zinaida",
+            "pos": [230, 100],
+            "facing": "LEFT"
         }
     ],
     "layers": [

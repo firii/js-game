@@ -1,10 +1,11 @@
 class Label {
-    constructor(text, charSize, x, y, color = "#fff", align = "center") {
+    constructor(text, charSize, x = 0, y = 0, color = "#fff", align = "center") {
         this._charSize = charSize;
-        this._pos = new Vector(x, y);
+        this.pos = new Vector(x, y);
         
         this.color = color;
         this.text = text;
+        
         this.align = align;
     }
 
@@ -16,12 +17,12 @@ class Label {
         }
     }
 
-    render(ctx) {
+    render() {
         ctx.save();
         ctx.font = this._charSize + "px BBCMicrofont";
         ctx.textAlign = this.align;            
         ctx.fillStyle = this.color;
-        ctx.fillText(this.text, this._pos.x, this._pos.y);
+        ctx.fillText(this.text, this.pos.x, this.pos.y);
         ctx.restore();
     }
 }

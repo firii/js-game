@@ -29,13 +29,13 @@ class MenuState extends GameState {
         this.gui.update();
     }
 
-    render(ctx) {
-        this.background.render(ctx, 0, 0, WIN_WIDTH, WIN_HEIGHT);
+    render() {
+        this.background.render(0, 0, WIN_WIDTH, WIN_HEIGHT);
 
-        this.logo.render(ctx, 143, 20, 118 * 3, 52 * 3);
+        this.logo.render(143, 20, 118 * 3, 52 * 3);
 
-        this.gui.render(ctx);
+        this.gui.render();
 
-        this.verLabel.render(ctx);
+        this.verLabel.render();
     }
 }

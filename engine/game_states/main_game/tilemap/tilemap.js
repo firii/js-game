@@ -16,13 +16,13 @@ class TileMap {
         this._layers = level.layers;
     }
 
-    render(ctx, brx, bry, erx, ery) {
+    render(brx, bry, erx, ery) {
         for (let l = 0; l < this._layers.length; l++) {
 
             for (let i = bry; i < ery; i++) {
                 for (let j = brx; j < erx; j++) {
                     this._tileset.rect = this._rects[this._layers[l][i * this.width + j]];
-                    this._tileset.render(ctx, j * TILE_SCALE, i * TILE_SCALE,
+                    this._tileset.render(j * TILE_SCALE, i * TILE_SCALE,
                         TILE_SCALE, TILE_SCALE);
                 }
             }

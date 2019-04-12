@@ -21,9 +21,9 @@ class Animation {
         this._currentFrame = 0;
     }
 
-    render(ctx, x, y) {
+    render(x, y) {
         this._sprite.rect = this._frames[Math.floor(this._currentFrame)];
-        this._sprite.render(ctx, x * SCALE, y * SCALE, this._sprite.rect.width * SCALE, this._sprite.rect.height * SCALE);
+        this._sprite.render(x * SCALE, y * SCALE, this._sprite.rect.width * SCALE, this._sprite.rect.height * SCALE);
     }
 }
 
@@ -45,8 +45,8 @@ class AnimationManager {
         this._paused[name] = false;
     }
 
-    render(ctx, x, y) {
-        this._anims[this._currentAnim].render(ctx, x, y);
+    render(x, y) {
+        this._anims[this._currentAnim].render(x, y);
         if (!this._paused[this._currentAnim])
             this._anims[this._currentAnim].step();
     }
@@ -63,4 +63,7 @@ class AnimationManager {
         this._currentAnim = name;
     }
 
+    hasAnimation(name) {
+        return this._anims[name];
+    }
 }

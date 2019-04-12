@@ -8,7 +8,7 @@ class GameState {
 
     update() { }
 
-    render(ctx) { }
+    render() { }
 }
 
 class StateManager {
