@@ -70,7 +70,7 @@ class Living {
 
     checkEntityCollision(entities) {
         for (let e of entities) {
-            if (e == this) continue;
+            if (e == this || e.inactive) continue;
             // rectangle collision detection
             if (!(e.x > this.x + this.width + this.dx || 
                   e.x + e.width < this.x + this.dx || 

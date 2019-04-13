@@ -3,6 +3,8 @@ const TILE_SIZE = 24;
 const SCALE = 2;
 const TILE_SCALE = TILE_SIZE * SCALE;
 
+const PLAYER_NAME = "Иванов";
+
 /**
  * @enum
  */

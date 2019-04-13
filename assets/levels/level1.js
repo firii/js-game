@@ -7,14 +7,14 @@ const level1 = {
         {
             "id": 1,
             "type": "npc_zinaida",
-            "pos": [120, 100],
+            "pos": [200, 100],
             "facing": "RIGHT"
         },
         {
             "id": 2,
-            "type": "npc_zinaida",
-            "pos": [230, 100],
-            "facing": "LEFT"
+            "type": "item_note",
+            "pos": [120, 100],
+            "facing": "DOWN"
         }
     ],
     "layers": [

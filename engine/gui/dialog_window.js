@@ -32,6 +32,10 @@ class OptionWindow {
         return false;
     }
 
+    clearChoice() {
+        this._done = false;
+    }
+
     handleInput() {
         if (this._glowTime <= 0 && this.isVisible) {
             if (ctrl.isKeyDown("KeyE")) {
@@ -87,15 +91,15 @@ class DialogWindow extends OptionWindow{
 
         this._textLabels = [
             new Label("", 20, x + 10, y + 50, "#99aebd", "left"),
-            new Label("", 20, x + 10, y + 60, "#99aebd", "left"),
-            new Label("", 20, x + 10, y + 70, "#99aebd", "left")
+            new Label("", 20, x + 10, y + 65, "#99aebd", "left"),
+            new Label("", 20, x + 10, y + 80, "#99aebd", "left")
         ];
 
         this.setOptions(
-            new Label("", 20, 160, 455),
-            new Label("", 20, 460, 455),
-            new Label("", 20, 160, 470),
-            new Label("", 20, 460, 470)
+            new Label("", 22, 160, 455),
+            new Label("", 22, 460, 455),
+            new Label("", 22, 160, 470),
+            new Label("", 22, 460, 470)
         );
         
         this._timer = -1;
@@ -107,6 +111,9 @@ class DialogWindow extends OptionWindow{
         this._done = false;
         this._glowTime = -1;
         this._timer = -1;
+        this._textLabels.forEach((elem) => {elem.text = ""});
+        this._options.forEach((elem) => {elem.text = ""});
+        this._titleLabel.text = "";
     }
 
     _cycleOption() {
@@ -133,8 +140,8 @@ class DialogWindow extends OptionWindow{
                 let text = answers[ind];
                 switch (text[0]) {
                     // color prefixes for dialog options
-                    case "!": color = "#bb9d3b"; text = text.substring(1); break;
-                    case "*": color = "#bb443b"; text = text.substring(1); break;
+                    case "*": color = "#bb9d3b"; text = text.substring(1); break;
+                    case "!": color = "#bb443b"; text = text.substring(1); break;
                 }
     
                 this._options[ind].color = color;

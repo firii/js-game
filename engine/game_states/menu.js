@@ -26,6 +26,7 @@ class MenuState extends GameState {
     }
 
     update() {
+        this.gui.clearChoice();
         this.gui.update();
     }
 

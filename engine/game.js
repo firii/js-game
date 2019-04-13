@@ -2,6 +2,7 @@ class Game {
     constructor() {
 
         this.stateManager = new StateManager();
+        this.stateManager.push("MENU");
         this.stateManager.push("MAIN_GAME");
 
         this.done = false;

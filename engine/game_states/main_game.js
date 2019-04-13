@@ -56,20 +56,26 @@ class MainGameState extends GameState {
 
             // handle player press to activate interactable object
             if (ctrl.isKeyDown("KeyE")) this.requestAction = true;
+            // go back to the menu
+            if (ctrl.isKeyDown("Escape")) this.isDone = true;
         }
 
         this.dialogWin.handleInput();
     }
 
     update() {
-        this.interactable.forEach((inter) => {inter.update()});
+        for (let inter of this.interactable) {
+            if (inter.inactive) continue;
+            inter.update();
+        }
 
         if (!this.se.inActionLoop) {
             // if players is currently not in action loop,
             // meaning no dialog is displayed or automatic action performed
             // we look through interactable objects in range of activation
             let avaliable = [];
-            for (let inter of this.interactable) {         
+            for (let inter of this.interactable) {
+                if (inter.inactive || !this.se.getAction(inter)) continue;
                 if (Vector.dist(inter.pos, this.player.pos) < inter.activationRadius) {
                     avaliable.push(inter);
                 }
@@ -79,18 +85,32 @@ class MainGameState extends GameState {
                 // if object is in range and automatic it will perform actions automatically
                 let a = findAuto(avaliable)
                 if (a) {
-                    this.se.interact(a);
+                    this.se.setInteractable(a);
+                    this.se.nextAction();
                 } else {
                     // else object closest to player is marked as avaliable
                     avaliable.sort(this.sortFunc);
                     avaliable[0].avaliable = true;
-                    // 
-                    if (this.requestAction) this.se.interact(avaliable[0])
+                    if (this.requestAction) {
+                        this.se.setInteractable(avaliable[0]);
+                        this.se.nextAction();
+                    }
                 }
             }
         } else {
             // do commands, order actions
-            
+            if (this.se.actionComplete) {
+                if (!this.se.nextAction()) {
+                    this.se.inActionLoop = false;
+                    this.dialogWin.isVisible = false;
+                }
+            }
+            if (this.dialogWin.isVisible) {
+                let choice = this.dialogWin.getAnswer();
+                if (choice || choice === 0) {
+                    this.se.completeCurrent(choice);
+                }
+            }
             
         }
         this.player.checkCollision(this.curLevel.solids, this.curLevel.tilemapDim[0]);
@@ -152,10 +172,11 @@ class MainGameState extends GameState {
         ctx.save();
         ctx.translate(-offsetX, -offsetY);
         this.tileMap.render(beginRenderX, beginRenderY, endRenderX, endRenderY);
+        this.player.render();
         for (let inter of this.interactable) {
+            if (inter.inactive) continue;
             inter.render();
         }
-        this.player.render();
         ctx.restore();
 
         // display GUI

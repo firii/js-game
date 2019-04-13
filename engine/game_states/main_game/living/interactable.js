@@ -3,6 +3,7 @@ class Interactable extends Living{
         super();
         this.id = data.id;
         this.pos = new Vector(...data.pos);
+        this.inactive = data.inactive;
         this._type = Assets.get(data.type);
         this._dim = new Vector(...this._type.dimensions);
         this._facing = data.facing;
@@ -21,7 +22,7 @@ class Interactable extends Living{
             this.actions.push(new Action(this._type.actions[i]))
         }
 
-        let lbText = (this.pickable) ? "[E] Взять" : "[E] Говорить";
+        let lbText = (this.pickable) ? "[E] Осмотреть" : "[E] Говорить";
         this._avaliableLabel = new Label(lbText, 16);
     }
 
@@ -37,4 +38,6 @@ class Interactable extends Living{
             this._avaliableLabel.render();
         }
     }
+
+    get name() { return this._type.name }
 }
