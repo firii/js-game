@@ -46,18 +46,26 @@ class AssetManager {
             "player": new Asset("images/ivanov.png"),
             "zinaida": new Asset("images/zinaida.png"),
             "note": new Asset("images/note.png"),
+            "pythagoras": new Asset("images/pythagoras.png"),
+            "chem_flask": new Asset("images/chem_flask.png"),
+            "newton_cradle": new Asset("images/newton_cradle.png"),
             
             // Json
             // NPC
             "npc_zinaida": new Asset(npc_zinaida),
             "item_note": new Asset(item_note),
+            "enemy_pythagoras": new Asset(enemy_pythagoras),
+            "enemy_chem_flask": new Asset(enemy_chem_flask),
+            "enemy_newton_cradle": new Asset(enemy_newton_cradle),
             // levels
             "level1": new Asset(level1),
-            "demo_level": new Asset(demo_level),
             //animations
             "anim_note": new Asset(anim_note),
             "anim_player": new Asset(anim_player),
-            "anim_zinaida": new Asset(anim_zinaida)
+            "anim_zinaida": new Asset(anim_zinaida),
+            "anim_pythagoras": new Asset(anim_pythagoras),
+            "anim_chem_flask": new Asset(anim_chem_flask),
+            "anim_newton_cradle": new Asset(anim_newton_cradle)
 
         };
 
